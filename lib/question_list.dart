@@ -51,7 +51,7 @@ class DyanmicList extends State<ListDisplay> {
         padding: const EdgeInsets.symmetric(vertical: 16.0),
         child: Column(
           children: <Widget>[
-            Text("Question"),
+            Text(q.headings[0].heading),
             TextFormField(
               controller: eCtrl,
               validator: (value) {
@@ -79,7 +79,7 @@ class DyanmicList extends State<ListDisplay> {
         padding: const EdgeInsets.symmetric(vertical: 16.0),
         child: Column(
           children: <Widget>[
-            Text("Question"),
+            Text(q.headings[0].heading),
             TextFormField(
               keyboardType: TextInputType.multiline,
               maxLines: 5,
