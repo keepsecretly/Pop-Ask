@@ -20,9 +20,9 @@ class SurveyAPI {
     }
   }
 
-  static Future<Survey> get(int id) async {
-    var response = await http
-        .get(baseUrl + "/v3/surveys/" + id.toString() + "/details", headers: {
+  static Future<Survey> get(String id) async {
+    var response =
+        await http.get(baseUrl + "/v3/surveys/" + id + "/details", headers: {
       "Authorization":
           "Bearer r0s9r6NRM1l6Hl6jTkDPwKOeMba-3josbWplJIMOEjBml-benUtMf0jRhc5MpYW1B97CNEEllcO1wqHpzLVh9zMqw-nfZPxx9kb0EoNmy.5p5Qg9RNOWKdwqt5eJYJm7"
     });
