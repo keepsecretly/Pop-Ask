@@ -23,8 +23,7 @@ class DyanmicList extends State<ListDisplay> {
   DyanmicList({Key key, @required this.quizes});
 
   Widget buildQuestionList (BuildContext ctxt) {
-    return ListView(
-            padding: const EdgeInsets.all(8),
+    return Column(
             children: <Widget>[
               for(var q in quizes ) buildAnswer(ctxt, q),
             ]
@@ -35,16 +34,16 @@ class DyanmicList extends State<ListDisplay> {
 
       if (q.family == OPEN_ENDED) {
         if (q.subType == SINGLE) {
-          return buildShortAnswer(ctxt);
+          return buildShortAnswer(ctxt, q);
         } else if (q.subType == ESSAY) {
-          return buildLongAnswer(ctxt);
+          return buildLongAnswer(ctxt, q);
         }
       }
 
-      return new Text("QQQQQ");
+      return new Text("");
   }
 
-  Widget buildShortAnswer (BuildContext ctxt) {
+  Widget buildShortAnswer (BuildContext ctxt, Question q) {
 
     final TextEditingController eCtrl = new TextEditingController();
 
@@ -72,7 +71,7 @@ class DyanmicList extends State<ListDisplay> {
     );
   }
 
-  Widget buildLongAnswer (BuildContext ctxt) {
+  Widget buildLongAnswer (BuildContext ctxt, Question q) {
 
     final TextEditingController eCtrl = new TextEditingController();
 
@@ -104,8 +103,6 @@ class DyanmicList extends State<ListDisplay> {
 
   @override
   Widget build (BuildContext ctxt) {
-    return new Scaffold(
-      body: buildQuestionList(ctxt),
-    );
+    return buildQuestionList(ctxt);
   }
 }
