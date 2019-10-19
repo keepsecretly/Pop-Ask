@@ -1,7 +1,6 @@
 import 'question_model.dart';
 
 class Page {
-
   final String description;
   final List<Question> questions;
 
@@ -10,7 +9,7 @@ class Page {
   factory Page.fromJson(Map<String, dynamic> json) {
     return Page(
       description: json['description'],
-      questions: json['questions'],
+      questions: new List<Question>.from(json['questions']),
     );
   }
 }

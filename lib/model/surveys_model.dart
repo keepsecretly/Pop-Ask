@@ -6,8 +6,10 @@ class Surveys {
   Surveys({this.surveys});
 
   factory Surveys.fromJson(Map<String, dynamic> json) {
+    var data = json['data'] as List;
+
     return Surveys(
-      surveys: json['data'],
+      surveys: data.map((d) => Survey.fromJson(d)).toList(),
     );
   }
 }
