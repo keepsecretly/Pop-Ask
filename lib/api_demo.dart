@@ -57,7 +57,7 @@ class _ApiDemoState extends State<ApiDemo> {
 
       if (survey.pages.length > 0) {
         return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Form(
                           key: _formKey,
                           child: ListView(

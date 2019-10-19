@@ -76,7 +76,7 @@ class DyanmicList extends State<ListDisplay> {
     final TextEditingController eCtrl = new TextEditingController();
 
     return new Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0),
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           children: <Widget>[
             Text(q.headings[0].heading),
