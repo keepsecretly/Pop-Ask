@@ -28,7 +28,7 @@ class Question {
     return Question(
       displayOption: displayOptions,
       required: required,
-      subType: json['sub_type'],
+      subType: json['subtype'],
       family: json['family'],
     );
   }
