@@ -9,7 +9,7 @@ class Page {
   factory Page.fromJson(Map<String, dynamic> json) {
     return Page(
       description: json['description'],
-      questions: json['questions'].map((p) => Page.fromJson(p)).toList(),
+      questions: json['questions'].map((q) => Question.fromJson(q)).toList(),
     );
   }
 }
