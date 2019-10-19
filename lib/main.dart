@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pop_ask/api_demo.dart';
+import 'package:pop_ask/model/question_model.dart';
 
 void main() => runApp(ApiDemo());
 
@@ -41,32 +42,64 @@ class ListDisplay extends StatefulWidget {
 
 class DyanmicList extends State<ListDisplay> {
   List<String> litems = [];
-  final TextEditingController eCtrl = new TextEditingController();
+
+  List<Question> quizes = [
+    Question(),
+    Question(),
+    Question(),
+    Question(),
+    Question(),
+  ];
+
+  Widget buildQuestionList (BuildContext ctxt) {
+    return new ListView(
+        padding: const EdgeInsets.all(8),
+        children: <Widget>[
+          for(var q in quizes ) buildLongAnswer(ctxt, q)
+        ]
+      );
+  }
+
+  Widget buildShortAnswer (BuildContext ctxt, Question q) {
+
+    final TextEditingController eCtrl = new TextEditingController();
+
+    return new Column(
+//      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Text("Question"),
+        new TextField(
+          controller: eCtrl,
+          onSubmitted: (text) {
+            litems.add(text);
+            eCtrl.clear();
+            setState(() {});
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget buildLongAnswer (BuildContext ctxt, Question q) {
+
+    final TextEditingController eCtrl = new TextEditingController();
+
+    return new Column(
+      children: <Widget>[
+        Text("Question"),
+        new TextField(
+          keyboardType: TextInputType.multiline,
+          maxLines: 5,
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build (BuildContext ctxt) {
     return new Scaffold(
         appBar: new AppBar(title: new Text("Dynamic Demo"),),
-        body: new Column(
-          children: <Widget>[
-            new TextField(
-              controller: eCtrl,
-              onSubmitted: (text) {
-                litems.add(text);
-                eCtrl.clear();
-                setState(() {});
-              },
-            ),
-            new Expanded(
-                child: new ListView.builder
-                  (
-                    itemCount: litems.length,
-                    itemBuilder: (BuildContext ctxt, int Index) {
-                      return new Text(litems[Index]);
-                    }
-                )
-            )
-          ],
-        )
+        body: buildQuestionList(ctxt),
     );
   }
 }
