@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pop_ask/api/survey_api.dart';
 import 'package:pop_ask/model/page_model.dart';
 import 'package:pop_ask/model/question_model.dart';
-import 'package:pop_ask/model/surveys_model.dart';
+import 'package:pop_ask/model/survey_model.dart';
 import 'package:pop_ask/question_list.dart';
 
 class ApiDemo extends StatefulWidget {
@@ -13,14 +13,12 @@ class ApiDemo extends StatefulWidget {
 }
 
 class _ApiDemoState extends State<ApiDemo> {
-  Future<Surveys> surveys;
-
-  List<Page> pages = [];
-
+  Future<Survey> survey;
+  
   @override
   void initState() {
     super.initState();
-    surveys = SurveyAPI.list();
+    survey = SurveyAPI.get("271477286");
   }
 
   @override
@@ -35,12 +33,12 @@ class _ApiDemoState extends State<ApiDemo> {
           title: Text('Fetch Data Example'),
         ),
         body: Center(
-          child: FutureBuilder<Surveys>(
-            future: surveys,
+          child: FutureBuilder<Survey>(
+            future: survey,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
 //                return Text(snapshot.data.surveys[0].title);
-                return firstPage(context);
+                return firstPage(context, snapshot.data);
               } else if (snapshot.hasError) {
                 return Text("${snapshot.error}");
               }
@@ -53,9 +51,9 @@ class _ApiDemoState extends State<ApiDemo> {
     );
   }
 
-  Widget firstPage(BuildContext context) {
-      if (pages.length > 0) {
-        return new ListDisplay(quizes: pages[0].questions,);
+  Widget firstPage(BuildContext context, Survey survey) {
+      if (survey.pages.length > 0) {
+        return new ListDisplay(quizes: survey.pages[0].questions,);
       } else {
         return Text("This page has no question");
       }
