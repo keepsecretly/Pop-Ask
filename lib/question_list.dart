@@ -5,35 +5,18 @@ final TextEditingController eCtrl = new TextEditingController();
 
 class ListDisplay extends StatefulWidget {
   final List<Question> quizes;
-
-  // Declare a field that holds the Todo.
-//  final Todo todo;
-
-  // In the constructor, require a Todo.
   ListDisplay({Key key, @required this.quizes}) : super(key: key);
 
   @override
-  State createState() => new DyanmicList();
+  State createState() => new DyanmicList(quizes: quizes);
 
 }
 
 class DyanmicList extends State<ListDisplay> {
   List<String> litems = [];
 
-//  List<Question> quizes = [
-//    Question(),
-//    Question(),
-//    Question(),
-//    Question(),
-//    Question(),
-//  ];
-
-  List<String> quizes = [];
-//    "Short 1",
-//    "Short 2",
-//    "Long 1",
-//    "Long 2",
-//  ];
+  final List<Question> quizes;
+  DyanmicList({Key key, @required this.quizes});
 
   Widget buildQuestionList (BuildContext ctxt) {
     return ListView(
@@ -44,7 +27,8 @@ class DyanmicList extends State<ListDisplay> {
           );
   }
 
-  Widget buildAnswer (BuildContext ctxt, String qtype) {
+  Widget buildAnswer (BuildContext ctxt, Question q) {
+      var qtype = "Long";
       if (qtype.matchAsPrefix("Long") == true) {
         return buildLongAnswer(ctxt);
       } else if (qtype.matchAsPrefix("Short") == true) {
