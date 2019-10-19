@@ -1,8 +1,8 @@
 class DisplayOption {
   final String displayType;
   final String displaySubType;
-  final int leftLabel;
-  final int rightLabel;
+  final String leftLabel;
+  final String rightLabel;
 
   DisplayOption({
     this.displayType,
