@@ -6,8 +6,9 @@ class Question {
   final DisplayOption displayOption;
   final Required required;
   final String subType;
+  final String family;
 
-  Question({this.displayOption, this.required, this.subType});
+  Question({this.displayOption, this.required, this.subType, this.family});
 
   factory Question.fromJson(Map<String, dynamic> json) {
     var displayOptionsJson = json['display_options'];
@@ -28,6 +29,7 @@ class Question {
       displayOption: displayOptions,
       required: required,
       subType: json['sub_type'],
+      family: json['family'],
     );
   }
 }
