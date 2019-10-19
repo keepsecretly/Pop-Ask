@@ -12,6 +12,10 @@ class ListDisplay extends StatefulWidget {
 
 }
 
+final String OPEN_ENDED = "open_ended";
+final String SINGLE = "single";
+final String ESSAY = "essay";
+
 class DyanmicList extends State<ListDisplay> {
   List<String> litems = [];
 
@@ -28,14 +32,16 @@ class DyanmicList extends State<ListDisplay> {
   }
 
   Widget buildAnswer (BuildContext ctxt, Question q) {
-      var qtype = "Long";
-      if (qtype.matchAsPrefix("Long") == true) {
-        return buildLongAnswer(ctxt);
-      } else if (qtype.matchAsPrefix("Short") == true) {
-        return buildShortAnswer(ctxt);
-      } else {
-        return new Text("");
+
+      if (q.family == OPEN_ENDED) {
+        if (q.subType == SINGLE) {
+          return buildShortAnswer(ctxt);
+        } else if (q.subType == ESSAY) {
+          return buildLongAnswer(ctxt);
+        }
       }
+
+      return new Text("QQQQQ");
   }
 
   Widget buildShortAnswer (BuildContext ctxt) {

@@ -54,36 +54,31 @@ class _ApiDemoState extends State<ApiDemo> {
   }
 
   Widget firstPage(BuildContext context, Survey survey) {
-    List<Question> qs = [
-      Question(),
-      Question(),
-      Question(),
-      Question(),
-    ];
 
       if (survey.pages.length > 0) {
-        return Form(
-            key: _formKey,
-            child: Column(
-              children: <Widget>[
-                new ListDisplay(quizes: qs,),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: RaisedButton(
-                    onPressed: () {
-                      // Validate returns true if the form is valid, or false
-                      // otherwise.
-                      if (_formKey.currentState.validate()) {
-                        Scaffold.of(context)
-                            .showSnackBar(SnackBar(content: Text('Processing Data')));
-                      }
-                    },
-                    child: Text('Submit'),
-                  ),
-                ),
-              ],
-            )
-        );
+        return new ListDisplay(quizes: survey.pages[0].questions,);
+//        return Form(
+//            key: _formKey,
+//            child: Column(
+//              children: <Widget>[
+//                new ListDisplay(quizes: qs,),
+//                Padding(
+//                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+//                  child: RaisedButton(
+//                    onPressed: () {
+//                      // Validate returns true if the form is valid, or false
+//                      // otherwise.
+//                      if (_formKey.currentState.validate()) {
+//                        Scaffold.of(context)
+//                            .showSnackBar(SnackBar(content: Text('Processing Data')));
+//                      }
+//                    },
+//                    child: Text('Submit'),
+//                  ),
+//                ),
+//              ],
+//            )
+//        );
       } else {
         return Text("This page has no question");
       }
