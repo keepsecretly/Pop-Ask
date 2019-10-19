@@ -4,6 +4,7 @@ import 'package:pop_ask/api_demo.dart';
 void main() => runApp(ApiDemo());
 
 class MyApp extends StatelessWidget {
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -19,12 +20,57 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepPurple,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+//      home: MyHomePage(title: 'Pop Ask'),
+      home: new ListDisplay()
+    );
+  }
+
+
+}
+
+final TextEditingController eCtrl = new TextEditingController();
+
+class ListDisplay extends StatefulWidget {
+
+  @override
+  State createState() => new DyanmicList();
+
+}
+
+class DyanmicList extends State<ListDisplay> {
+  List<String> litems = [];
+  final TextEditingController eCtrl = new TextEditingController();
+  @override
+  Widget build (BuildContext ctxt) {
+    return new Scaffold(
+        appBar: new AppBar(title: new Text("Dynamic Demo"),),
+        body: new Column(
+          children: <Widget>[
+            new TextField(
+              controller: eCtrl,
+              onSubmitted: (text) {
+                litems.add(text);
+                eCtrl.clear();
+                setState(() {});
+              },
+            ),
+            new Expanded(
+                child: new ListView.builder
+                  (
+                    itemCount: litems.length,
+                    itemBuilder: (BuildContext ctxt, int Index) {
+                      return new Text(litems[Index]);
+                    }
+                )
+            )
+          ],
+        )
     );
   }
 }
+
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -92,21 +138,25 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have tapped the button - times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
+            getTextWidgets(["a", "b", "c"])
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+//      floatingActionButton: FloatingActionButton(
+//        onPressed: _incrementCounter,
+//        tooltip: 'Increment',
+//        child: Icon(Icons.add),
+//      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+
+  Widget getTextWidgets(List<String> strings)
+  {
+    return new Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        for(var item in strings ) Text(item)
+      ],
     );
   }
 }
