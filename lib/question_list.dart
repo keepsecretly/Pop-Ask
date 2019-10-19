@@ -35,32 +35,13 @@ class DyanmicList extends State<ListDisplay> {
 //    "Long 2",
 //  ];
 
-  final _formKey = GlobalKey<FormState>();
-
   Widget buildQuestionList (BuildContext ctxt) {
-    return Form(
-        key: _formKey,
-        child: ListView(
+    return ListView(
             padding: const EdgeInsets.all(8),
             children: <Widget>[
               for(var q in quizes ) buildAnswer(ctxt, q),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: RaisedButton(
-                  onPressed: () {
-                    // Validate returns true if the form is valid, or false
-                    // otherwise.
-                    if (_formKey.currentState.validate()) {
-                      Scaffold.of(ctxt)
-                          .showSnackBar(SnackBar(content: Text('Processing Data')));
-                    }
-                  },
-                  child: Text('Submit'),
-                ),
-              ),
             ]
-        )
-    );
+          );
   }
 
   Widget buildAnswer (BuildContext ctxt, String qtype) {
